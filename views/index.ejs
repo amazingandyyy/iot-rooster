@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
+    <title>IoT clock</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -26,6 +26,9 @@
     }
     .text-center{
          text-align: center;
+    }
+    .title {
+        font-family: 'Pacifico', cursive;
     }
     /*.time_setter h1{
         font-family: 'Pacifico', cursive;
@@ -54,6 +57,10 @@
         font-size: 5em;
         font-family: 'Pacifico', cursive;
     }
+    .spin-clock {
+        margin-bottom: 20px;
+    }
+
     </style>
 </head>
 
@@ -62,16 +69,15 @@
         <div class="container text-center">
             <div class="row">
                 <div class="col-sm-2 col-md-3">
-
                 </div>
                 <div class="col-sm-8 col-md-6">
                     <br>
                     <br>
                     <br>
                     <h1>
-                        <i class="fa fa-clock-o fa-spin"></i>
+                        <i class="fa fa-clock-o spin-clock"></i>
                         <br>
-                        <span class="time_setter">Set up your clock</span>
+                        <span class="time_setter title">Bears' IoT Clock</span>
                     </h1>
                     <hr>
                     <form class="time_setter">
@@ -107,18 +113,24 @@
             var minute = 0;
             var second = 0;
             var over = false
+            var currentTime = new Date();
+            var currentHour = currentTime.getHours()
+            var currentMinute = currentTime.getMinutes()
 
+            console.log('currentTime hour: ', currentTime.getHours())
             $('form').submit(function(event) {
                 event.preventDefault();
                 var time = $('.input-time').val()
-                console.log('time: ', time)
-                minute = Number(time.split(':')[0]),
-                second = Number(time.split(':')[1]),
+                hour = currentHour-Number(time.split(':')[0]),
+                minute = Number(time.split(':')[1])-currentMinute,
+                totalSecond = 60 * minute + second
+                console.log('totalSecond: ' ,totalSecond)
                 time = {
+                    hour: hour,
                     minute: minute,
-                    second: second,
-                    totalSecond: 60 * minute + second
+                    totalSecond: totalSecond
                 }
+                console.log('timetimetime: ', time)
                 $.ajax({
                   type: "POST",
                   url: "api/setclock",
@@ -135,6 +147,7 @@
                 }
             })
             function startCountDown(time){
+                $('.spin-clock').addClass('fa-spin');
                 function startTimer(duration, display) {
                     var timer = duration, minutes, seconds;
                     $('progress.progress').attr('max', timer)
@@ -163,9 +176,9 @@
                                 $('.the_background').css('display', 'none')
                                 $('.wake_me_up').css('display', 'block')
                             }
-                            if (timer < 20){
+                            if (timer < 30){
                                 console.log('ddddd: ', (timer)/20)
-                                $('.the_background').css('opacity', (timer)/20)
+                                $('.the_background').css('opacity', (timer)/30)
                             }
                         }
                     }, 1000);
