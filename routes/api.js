@@ -19,7 +19,7 @@ router.post('/sentMessage', function(req, res) {
       to: friend_phone,
       from: process.env.TWILIO_NUMBER,
       body: `Your friend ${name} cannot be waken up by sunlight, whould you help him/her?`
-  }, (err, res) => {
+  }, (err, ok) => {
       if (err) {
           console.log('err when send twilio SMS: ', err);
           return res.status(500).send('fail to send')
