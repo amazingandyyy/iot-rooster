@@ -7,7 +7,8 @@ router.post('/setclock', function(req, res) {
   console.log('clock_info: ', clock_info);
   res.send(clock_info)
 });
-router.get('/getlatestclock', function(req, res) {
+router.get('/clockjson', function(req, res) {
+    // /spi/clockjson
   res.send(clock_info)
 });
 
