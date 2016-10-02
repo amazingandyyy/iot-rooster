@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var clock_info = {};
-let twilio = require('twilio')('ACde4b5185d791d3cc1fb166ef26bd83e8', '51bb6fc690da9eac733672a812725b11');
+var twilio = require('twilio')('ACde4b5185d791d3cc1fb166ef26bd83e8', '51bb6fc690da9eac733672a812725b11');
 /* GET users listing. */
 router.post('/setclock', function(req, res) {
     // -POST /api/setclock
