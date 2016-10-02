@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var clock_info = {};
-var twilio = require('twilio')('ACde4b5185d791d3cc1fb166ef26bd83e8', '51bb6fc690da9eac733672a812725b11');
+var twilio = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 /* GET users listing. */
 router.post('/setclock', function(req, res) {
     // -POST /api/setclock
@@ -17,7 +17,7 @@ router.post('/sentMessage', function(req, res) {
   console.log('friend_phone: ', friend_phone);
   twilio.sendMessage({
       to: friend_phone,
-      from: '+16282276006',
+      from: process.env.TWILIO_NUMBER,
       body: `Your friend ${name} cannot be waken up by sunlight, whould you help him/her out?`
   }, function(err, ok){
       if (err) {
