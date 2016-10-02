@@ -40,18 +40,18 @@ router.get('/clockjson', function(req, res) {
 // });
 
 module.exports = router;
-
-function sendTwilio(phone, message, successRes, cb) {
-    console.log('check');
-    twilio.sendMessage({
-        to: phone,
-        from: process.env.TWILIO_NUMBER,
-        body: message
-    }, (err, res) => {
-        if (err) {
-            console.log('err when send twilio SMS: ', err);
-            return cb(err)
-        }
-        cb(null, successRes);
-    })
-}
+//
+// function sendTwilio(phone, message, successRes, cb) {
+//     console.log('check');
+//     twilio.sendMessage({
+//         to: phone,
+//         from: process.env.TWILIO_NUMBER,
+//         body: message
+//     }, (err, res) => {
+//         if (err) {
+//             console.log('err when send twilio SMS: ', err);
+//             return cb(err)
+//         }
+//         cb(null, successRes);
+//     })
+// }
