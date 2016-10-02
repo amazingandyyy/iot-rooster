@@ -3,7 +3,7 @@
 /**
  * Module dependencies.
  */
-
+// require('dotenv').config()
 var app = require('../app');
 var debug = require('debug')('aaa:server');
 var http = require('http');
@@ -20,9 +20,9 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-var io = require('socket.io')(server);
-io.on('connection', function(){ /* … */ });
-server.listen(3000);
+// var io = require('socket.io')(server);
+// io.on('connection', function(){ /* … */ });
+// server.listen(3000);
 /**
  * Listen on provided port, on all network interfaces.
  */
