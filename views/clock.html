@@ -5,6 +5,7 @@
     </head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <body>
+        html
         <span class="clock"></span>
     </body>
     <script>
@@ -15,7 +16,8 @@
               success: success
             });
             function success(data){
-                $('.clock').html(JSON.stringify(data))
+                console.log('data2: ', JSON.stringify(data))
+                $('.clock').html()
             }
         })
     </script>
