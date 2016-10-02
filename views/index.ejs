@@ -112,8 +112,12 @@
                 event.preventDefault();
                 var time = $('.input-time').val()
                 console.log('time: ', time)
+                minute = Number(time.split(':')[0]),
+                second = Number(time.split(':')[1]),
                 time = {
-                    time: time
+                    minute: minute,
+                    second: second,
+                    totalSecond: 60 * minute + second
                 }
                 $.ajax({
                   type: "POST",
@@ -128,8 +132,6 @@
             function startCountDown(time){
                 $('.time_setter').css('display', 'none')
                 $('.time_counter').css('display', 'block')
-                minute = Number(time.split(':')[0])
-                second = Number(time.split(':')[1])
 
                 function startTimer(duration, display) {
                     var timer = duration, minutes, seconds;
@@ -164,8 +166,6 @@
                                 $('.the_background').css('opacity', (timer)/20)
                             }
                         }
-
-
                     }, 1000);
                 }
 
