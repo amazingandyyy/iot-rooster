@@ -7,10 +7,11 @@ router.post('/setclock', function(req, res) {
   console.log('clock_info: ', clock_info);
   res.send(clock_info)
 });
+
 router.get('/clockjson', function(req, res) {
     // /spi/clockjson
     var totalSecond = clock_info.totalSecond
-  res.send(totalSecond)
+    res.send(totalSecond)
 });
 
 router.get('/clock', function(req, res) {
