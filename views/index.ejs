@@ -77,11 +77,18 @@
                     <h1>
                         <i class="fa fa-clock-o spin-clock"></i>
                         <br>
-                        <span class="time_setter title">Bears' IoT Clock</span>
+                        <span class="time_setter title">Bears' Sunlight Clock</span>
                     </h1>
                     <hr>
                     <form class="time_setter">
-                        <input class="form-control text-center input-time" type="time">
+                        <h5>What's your name?</h5>
+                        <input class="form-control text-center input-name" placeholder="name" type="text">
+                        <br>
+                        <h5>When do you want to wake up?</h5>
+                        <input class="form-control text-center input-time" placeholder="time" type="time">
+                        <hr>
+                        <h5>Who is going to wake you up?</h5>
+                        <input class="form-control text-center input-phone" placeholder="phone" type="phone">
                         <br>
                         <button type="submit" class="btn btn-primary btn-block">Set the clock</button>
                     </form>
@@ -116,6 +123,8 @@
             var currentTime = new Date();
             var currentHour = currentTime.getHours()
             var currentMinute = currentTime.getMinutes()
+            var phoneNumber = 0;
+            var name = ''
 
             console.log('currentTime hour: ', currentTime.getHours())
             $('form').submit(function(event) {
@@ -137,6 +146,9 @@
                   data: time,
                   success: success
                 });
+                phoneNumber = $('.input-phone').val()
+                name = $('.input-name').val()
+                console.log('phoneNumber: ', phoneNumber)
                 function success(data){
                     $('.time_setter').css('display', 'none')
                     $('.time_counter').css('display', 'block')
@@ -175,6 +187,19 @@
                                 $('.time_counter').css('display', 'none')
                                 $('.the_background').css('display', 'none')
                                 $('.wake_me_up').css('display', 'block')
+                                content = {
+                                    phoneNumber: phoneNumber,
+                                    name: name
+                                }
+                                $.ajax({
+                                  type: "POST",
+                                  url: "api/sentMessage",
+                                  data: content,
+                                  success: successSend
+                                });
+                                function successSend(){
+                                    console.log('successSend: ', successSend)
+                                }
                             }
                             if (timer < 30){
                                 console.log('ddddd: ', (timer)/20)
