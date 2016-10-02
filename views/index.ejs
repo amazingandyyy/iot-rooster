@@ -75,13 +75,13 @@
                     </h1>
                     <hr>
                     <form class="time_setter">
-                        <input class="form-control text-center input-time" type="time" required>
+                        <input class="form-control text-center input-time" type="time">
                         <br>
                         <button type="submit" class="btn btn-primary btn-block">Set the clock</button>
                     </form>
                     <form class="time_counter">
                         <br>
-                        <h3 id="time">starting</h3>
+                        <h3 id="time">connect to the clock ...</h3>
                         <progress class="progress progress-striped2 progress-animated" value="0" max="185"></progress>
                         <br>
                         <button class="btn btn-secondary btn-block" onclick="resetClock()">Reset the clock</button>
@@ -126,13 +126,15 @@
                   success: success
                 });
                 function success(data){
-                    startCountDown(data.time)
+                    $('.time_setter').css('display', 'none')
+                    $('.time_counter').css('display', 'block')
+                    // setTimeout(function(){
+                        // console.log('startCountDown!')
+                        startCountDown(data.time)
+                    // }, 12000)
                 }
             })
             function startCountDown(time){
-                $('.time_setter').css('display', 'none')
-                $('.time_counter').css('display', 'block')
-
                 function startTimer(duration, display) {
                     var timer = duration, minutes, seconds;
                     $('progress.progress').attr('max', timer)
