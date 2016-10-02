@@ -11,4 +11,8 @@ router.get('/getlatestclock', function(req, res) {
   res.send(clock_info)
 });
 
+router.get('/clock', function(req, res) {
+  res.render('clock', { info: `${JSON.stringify(clock_info)}` });
+});
+
 module.exports = router;
