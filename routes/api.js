@@ -11,7 +11,7 @@ router.post('/setclock', function(req, res) {
 });
 
 router.post('/sentMessage', function(req, res) {
-    // -POST /api/setclock
+    // -POST /api/sentMessage
   var friend_phone = req.body.phoneNumber
   var name = req.body.name
   console.log('friend_phone: ', friend_phone);
